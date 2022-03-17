@@ -5,10 +5,10 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        sh " git clone https://github.com/AlbinAntony-NetStar/test-k8-doks.git "
-      }
+    stage('Checkout code') {
+        steps {
+            checkout scm
+        }
     }
 
     stage('Build image') {
