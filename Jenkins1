@@ -17,6 +17,7 @@ pipeline {
           sh " kubectl config get-contexts "
 
       }
+      }
     }
 
     stage('Pushing Image') {
@@ -40,5 +41,4 @@ pipeline {
 
   }
 
-}
 }
