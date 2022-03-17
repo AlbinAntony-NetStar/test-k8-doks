@@ -11,7 +11,7 @@ pipeline {
         }
     }
 
-    stage('Build image') {
+    stage('Checking') {
       steps{
         script {
           sh " kubectl config get-contexts "
@@ -20,13 +20,11 @@ pipeline {
       }
     }
 
-    stage('Pushing Image') {
+    stage('Build Image') {
      
       steps{
         script {
-          docker.withRegistry( 'registry.digitalocean.com' ) {
-            dockerImage.push("latest")
-          }
+          sh " docker build -t sample-project-al/sample-project1:one . "
         }
       }
     }
@@ -41,4 +39,5 @@ pipeline {
 
   }
 
+}
 }
