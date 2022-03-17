@@ -1,0 +1,43 @@
+pipeline {
+
+
+  agent any
+
+  stages {
+
+    stage('Checkout Source') {
+      steps {
+        sh " git clone https://github.com/AlbinAntony-NetStar/test-k8-doks.git "
+      }
+    }
+
+    stage('Build image') {
+      steps{
+        script {
+          sh " kubectl config get-contexts "
+
+      }
+    }
+
+    stage('Pushing Image') {
+     
+      steps{
+        script {
+          docker.withRegistry( 'registry.digitalocean.com' ) {
+            dockerImage.push("latest")
+          }
+        }
+      }
+    }
+
+    stage('Deploying App to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+        }
+      }
+    }
+
+  }
+
+}
