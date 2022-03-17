@@ -39,7 +39,7 @@ pipeline {
     stage('Depolyment') {
       steps {
         script {
-          sh " kubectl set image deployment/nginx-deployment registry.digitalocean.com/sample-project-al/sample-project:one --namespace default" 
+          sh " kubectl set image deployment/nginx-deployment nginx=registry.digitalocean.com/sample-project-al/sample-project:one --namespace default" 
         }
       }
     }
