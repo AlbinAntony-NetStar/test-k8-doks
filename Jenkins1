@@ -24,15 +24,15 @@ pipeline {
      
       steps{
         script {
-          sh " docker build -t sample-project-al/sample-project1:one . "
+          sh " docker build -t registry.digitalocean.com/sample-project-al/sample-project1:one . "
         }
       }
     }
 
-    stage('Deploying App to Kubernetes') {
+    stage('Push to Registry') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+          sh " docker push registry.digitalocean.com/sample-project-al/sample-project:one "
         }
       }
     }
