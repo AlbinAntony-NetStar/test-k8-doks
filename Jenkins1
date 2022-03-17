@@ -24,7 +24,7 @@ pipeline {
      
       steps{
         script {
-          sh " docker build -t registry.digitalocean.com/sample-project-al/sample-project1:one . "
+          sh " docker build -t registry.digitalocean.com/sample-project-al/sample-project1:two . "
         }
       }
     }
@@ -32,14 +32,14 @@ pipeline {
     stage('Push to Registry') {
       steps {
         script {
-          sh " docker push registry.digitalocean.com/sample-project-al/sample-project:one "
+          sh " docker push registry.digitalocean.com/sample-project-al/sample-project:two "
         }
       }
     }
     stage('Depolyment') {
       steps {
         script {
-          sh " kubectl set image deployment/nginx-deployment nginx=registry.digitalocean.com/sample-project-al/sample-project:one --namespace default" 
+          sh " kubectl set image deployment/nginx-deployment nginx=registry.digitalocean.com/sample-project-al/sample-project:two --namespace default" 
         }
       }
     }
