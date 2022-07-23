@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx2-deployment
   labels:
-    app: nginx
+    app: nginx2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: nginx2
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx2
     spec:
       containers:
-      - name: nginx
-        image: aca2255/netstar:nginx1
+      - name: nginx2
+        image: aca2255/netstar:nginx2
         ports:
         - containerPort: 80
 
@@ -27,13 +27,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service-nodeport
+  name: nginx-service2
 spec:
   type: ClusterIP
   selector:
-    app: nginx
+    app: nginx2
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 80
 
